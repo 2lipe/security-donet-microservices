@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Movies.Api.Data;
 
 namespace Movies.Api
 {
@@ -31,6 +33,9 @@ namespace Movies.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Movies.Api", Version = "v1"});
             });
+
+            services.AddDbContext<MoviesApiContext>(options =>
+                    options.UseSqlite(Configuration.GetConnectionString("MoviesApiContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
