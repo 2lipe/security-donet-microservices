@@ -13,6 +13,8 @@ namespace IndentityServer
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+            
             services.AddIdentityServer()
                 .AddInMemoryClients(Config.Clients)
                 .AddInMemoryApiScopes(Config.ApiScopes)
@@ -26,12 +28,14 @@ namespace IndentityServer
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseIdentityServer();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
