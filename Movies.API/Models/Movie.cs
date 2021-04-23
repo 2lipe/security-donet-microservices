@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Movies.Client.Models
+namespace Movies.API.Models
 {
     public class Movie
     {
